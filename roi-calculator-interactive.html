@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agency ROI Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .input-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .results h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .metric-value.positive {
+            color: #28a745;
+        }
+
+        .metric-value.negative {
+            color: #dc3545;
+        }
+
+        .metric-subtitle {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .small-metric {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .small-metric-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .small-metric-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .full-width-section {
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Agency ROI Calculator</h1>
+            <p>Calculate the return on investment for your AI automation solution</p>
+        </div>
+
+        <div class="content">
+            <!-- Baseline Inputs -->
+            <div class="input-section">
+                <h2>📊 Baseline Metrics (Before AI)</h2>
+
+                <div class="form-group">
+                    <label for="baseline-labor">Monthly Labor Cost ($)</label>
+                    <input type="number" id="baseline-labor" placeholder="15000" value="15000">
+                </div>
+
+                <div class="form-group">
+                    <label for="baseline-software">Monthly Software Cost ($)</label>
+                    <input type="number" id="baseline-software" placeholder="500" value="500">
+                </div>
+
+                <div class="form-group">
+                    <label for="baseline-errors">Monthly Error/Rework Cost ($)</label>
+                    <input type="number" id="baseline-errors" placeholder="1000" value="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="baseline-hours">Labor Hours Per Week</label>
+                    <input type="number" id="baseline-hours" placeholder="120" value="120">
+                </div>
+
+                <div class="form-group">
+                    <label for="baseline-error-rate">Error Rate (%)</label>
+                    <input type="number" id="baseline-error-rate" placeholder="10" value="10" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="baseline-revenue">Monthly Revenue ($)</label>
+                    <input type="number" id="baseline-revenue" placeholder="0" value="0">
+                </div>
+            </div>
+
+            <!-- Current/Projected Inputs -->
+            <div class="input-section">
+                <h2>🚀 Current/Projected Metrics (After AI)</h2>
+
+                <div class="form-group">
+                    <label for="current-labor">Monthly Labor Cost ($)</label>
+                    <input type="number" id="current-labor" placeholder="8000" value="8000">
+                </div>
+
+                <div class="form-group">
+                    <label for="current-software">Monthly Software Cost ($)</label>
+                    <input type="number" id="current-software" placeholder="500" value="500">
+                </div>
+
+                <div class="form-group">
+                    <label for="current-errors">Monthly Error/Rework Cost ($)</label>
+                    <input type="number" id="current-errors" placeholder="200" value="200">
+                </div>
+
+                <div class="form-group">
+                    <label for="current-hours">Labor Hours Per Week</label>
+                    <input type="number" id="current-hours" placeholder="50" value="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="current-error-rate">Error Rate (%)</label>
+                    <input type="number" id="current-error-rate" placeholder="2" value="2" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="current-revenue">Monthly Revenue ($)</label>
+                    <input type="number" id="current-revenue" placeholder="0" value="0">
+                </div>
+            </div>
+
+            <!-- Investment Inputs -->
+            <div class="input-section full-width-section">
+                <h2>💰 Investment & Timeline</h2>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label for="implementation-cost">Implementation Cost ($)</label>
+                        <input type="number" id="implementation-cost" placeholder="25000" value="25000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ai-monthly-cost">Monthly AI Solution Cost ($)</label>
+                        <input type="number" id="ai-monthly-cost" placeholder="2000" value="2000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="months-deployed">Months Since Deployment</label>
+                        <input type="number" id="months-deployed" placeholder="6" value="6">
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateROI()">Calculate ROI</button>
+            </div>
+
+            <!-- Results -->
+            <div class="results full-width-section">
+                <h2>📈 ROI Analysis Results</h2>
+
+                <div class="metric-card">
+                    <div class="metric-label">Return on Investment (ROI)</div>
+                    <div class="metric-value positive" id="roi-percentage">--</div>
+                    <div class="metric-subtitle">Higher is better</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Payback Period</div>
+                    <div class="metric-value" id="payback-period">--</div>
+                    <div class="metric-subtitle">Time to recover initial investment</div>
+                </div>
+
+                <div class="results-grid">
+                    <div class="small-metric">
+                        <div class="small-metric-label">Monthly Savings</div>
+                        <div class="small-metric-value" id="monthly-savings">$0</div>
+                    </div>
+
+                    <div class="small-metric">
+                        <div class="small-metric-label">Annual Savings</div>
+                        <div class="small-metric-value" id="annual-savings">$0</div>
+                    </div>
+
+                    <div class="small-metric">
+                        <div class="small-metric-label">Time Saved</div>
+                        <div class="small-metric-value" id="time-saved">0%</div>
+                    </div>
+
+                    <div class="small-metric">
+                        <div class="small-metric-label">Error Reduction</div>
+                        <div class="small-metric-value" id="error-reduction">0%</div>
+                    </div>
+
+                    <div class="small-metric">
+                        <div class="small-metric-label">Net Monthly Benefit</div>
+                        <div class="small-metric-value" id="net-monthly">$0</div>
+                    </div>
+
+                    <div class="small-metric">
+                        <div class="small-metric-label">Net Annual Benefit</div>
+                        <div class="small-metric-value" id="net-annual">$0</div>
+                    </div>
+
+                    <div class="small-metric">
+                        <div class="small-metric-label">Cumulative Investment</div>
+                        <div class="small-metric-value" id="cumulative-cost">$0</div>
+                    </div>
+
+                    <div class="small-metric">
+                        <div class="small-metric-label">Cumulative Benefit</div>
+                        <div class="small-metric-value" id="cumulative-benefit">$0</div>
+                    </div>
+                </div>
+
+                <div class="info-box" id="recommendation">
+                    Click "Calculate ROI" to see your results and recommendations.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateROI() {
+            // Get baseline values
+            const baselineLabor = parseFloat(document.getElementById('baseline-labor').value) || 0;
+            const baselineSoftware = parseFloat(document.getElementById('baseline-software').value) || 0;
+            const baselineErrors = parseFloat(document.getElementById('baseline-errors').value) || 0;
+            const baselineHours = parseFloat(document.getElementById('baseline-hours').value) || 0;
+            const baselineErrorRate = parseFloat(document.getElementById('baseline-error-rate').value) || 0;
+            const baselineRevenue = parseFloat(document.getElementById('baseline-revenue').value) || 0;
+
+            // Get current values
+            const currentLabor = parseFloat(document.getElementById('current-labor').value) || 0;
+            const currentSoftware = parseFloat(document.getElementById('current-software').value) || 0;
+            const currentErrors = parseFloat(document.getElementById('current-errors').value) || 0;
+            const currentHours = parseFloat(document.getElementById('current-hours').value) || 0;
+            const currentErrorRate = parseFloat(document.getElementById('current-error-rate').value) || 0;
+            const currentRevenue = parseFloat(document.getElementById('current-revenue').value) || 0;
+
+            // Get investment values
+            const implementationCost = parseFloat(document.getElementById('implementation-cost').value) || 0;
+            const aiMonthlyCost = parseFloat(document.getElementById('ai-monthly-cost').value) || 0;
+            const monthsDeployed = parseFloat(document.getElementById('months-deployed').value) || 0;
+
+            // Calculate savings
+            const laborSavings = baselineLabor - currentLabor;
+            const softwareSavings = baselineSoftware - currentSoftware;
+            const errorSavings = baselineErrors - currentErrors;
+            const revenuIncrease = currentRevenue - baselineRevenue;
+
+            const monthlySavings = laborSavings + softwareSavings + errorSavings;
+            const annualSavings = monthlySavings * 12;
+
+            // Calculate efficiency gains
+            const timeSavedPercent = baselineHours > 0 ? ((baselineHours - currentHours) / baselineHours * 100) : 0;
+            const errorReduction = baselineErrorRate - currentErrorRate;
+
+            // Calculate net benefit
+            const netMonthly = monthlySavings + revenuIncrease - aiMonthlyCost;
+            const netAnnual = netMonthly * 12;
+
+            // Calculate cumulative
+            const cumulativeCost = implementationCost + (aiMonthlyCost * monthsDeployed);
+            const cumulativeSavings = (monthlySavings * monthsDeployed) + (revenuIncrease * monthsDeployed);
+            const cumulativeBenefit = cumulativeSavings - cumulativeCost;
+
+            // Calculate ROI
+            const roiPercent = cumulativeCost > 0 ? (cumulativeBenefit / cumulativeCost * 100) : 0;
+
+            // Calculate payback period
+            const paybackMonths = netMonthly > 0 ? implementationCost / netMonthly : Infinity;
+
+            // Update UI
+            document.getElementById('roi-percentage').textContent = roiPercent.toFixed(1) + '%';
+            document.getElementById('roi-percentage').className = 'metric-value ' + (roiPercent > 0 ? 'positive' : 'negative');
+
+            if (paybackMonths === Infinity) {
+                document.getElementById('payback-period').textContent = 'Never';
+                document.getElementById('payback-period').className = 'metric-value negative';
+            } else {
+                document.getElementById('payback-period').textContent = paybackMonths.toFixed(1) + ' months';
+                document.getElementById('payback-period').className = 'metric-value';
+            }
+
+            document.getElementById('monthly-savings').textContent = '$' + monthlySavings.toLocaleString();
+            document.getElementById('annual-savings').textContent = '$' + annualSavings.toLocaleString();
+            document.getElementById('time-saved').textContent = timeSavedPercent.toFixed(1) + '%';
+            document.getElementById('error-reduction').textContent = errorReduction.toFixed(1) + ' pp';
+            document.getElementById('net-monthly').textContent = '$' + netMonthly.toLocaleString();
+            document.getElementById('net-annual').textContent = '$' + netAnnual.toLocaleString();
+            document.getElementById('cumulative-cost').textContent = '$' + cumulativeCost.toLocaleString();
+            document.getElementById('cumulative-benefit').textContent = '$' + cumulativeBenefit.toLocaleString();
+
+            // Generate recommendation
+            let recommendation = '';
+            if (roiPercent > 200) {
+                recommendation = '🎉 <strong>Excellent ROI!</strong> This project is delivering exceptional value. Consider expanding to other areas or using this as a case study.';
+            } else if (roiPercent > 100) {
+                recommendation = '✅ <strong>Strong ROI!</strong> This investment is paying off well. The client is seeing significant returns.';
+            } else if (roiPercent > 50) {
+                recommendation = '👍 <strong>Good ROI!</strong> This project is delivering positive returns. Look for optimization opportunities to increase value.';
+            } else if (roiPercent > 0) {
+                recommendation = '⚠️ <strong>Positive but modest ROI.</strong> The project is profitable but may benefit from optimization or more time to mature.';
+            } else {
+                recommendation = '❌ <strong>Negative ROI.</strong> This project has not yet broken even. Review if more time is needed or if adjustments are required.';
+            }
+
+            if (paybackMonths <= 6) {
+                recommendation += ' The payback period is excellent at ' + paybackMonths.toFixed(1) + ' months.';
+            } else if (paybackMonths <= 12) {
+                recommendation += ' The payback period of ' + paybackMonths.toFixed(1) + ' months is reasonable.';
+            } else if (paybackMonths < Infinity) {
+                recommendation += ' The payback period of ' + paybackMonths.toFixed(1) + ' months is longer than ideal. Consider ways to accelerate value delivery.';
+            }
+
+            document.getElementById('recommendation').innerHTML = recommendation;
+        }
+
+        // Calculate on page load with default values
+        window.addEventListener('load', calculateROI);
+    </script>
+</body>
+</html>

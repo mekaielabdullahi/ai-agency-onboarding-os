@@ -1,0 +1,135 @@
+AI Agency ROI Calculator Template,,,,,,,
+Import this CSV into Excel or Google Sheets for full functionality,,,,,,,
+,,,,,,,
+CLIENT INFORMATION,,,,,,,
+Client Name:,[Enter Client Name],,,,,,
+Project Name:,[Enter Project Name],,,,,,
+Implementation Date:,[Enter Date],,,,,,
+Calculation Date:,[Enter Date],,,,,,
+Months Since Deployment:,[Enter Number],,,,,,
+,,,,,,,
+INVESTMENT COSTS,,,,,,,
+,Amount,Notes,,,,,
+Total Implementation Cost:,$0,"(One-time: dev, training, integration)",,,,,
+Monthly AI Solution Cost:,$0,"(Recurring: platform, maintenance)",,,,,
+,,,,,,,
+BASELINE METRICS (BEFORE),,,CURRENT METRICS (AFTER),,,IMPROVEMENT
+Category,Metric,Baseline Value,Unit,Current Value,Unit,Change,% Change
+,,,,,,,
+COST METRICS,,,,,,,
+Labor,Monthly Labor Cost,$0,USD/month,$0,USD/month,$0,0%
+Labor,Annual Labor Cost,$0,USD/year,$0,USD/year,$0,0%
+Software,Monthly Software Cost,$0,USD/month,$0,USD/month,$0,0%
+Software,Annual Software Cost,$0,USD/year,$0,USD/year,$0,0%
+Overhead,Monthly Overhead Cost,$0,USD/month,$0,USD/month,$0,0%
+Errors,Monthly Error Cost,$0,USD/month,$0,USD/month,$0,0%
+Total,Total Monthly Cost,$0,USD/month,$0,USD/month,$0,0%
+Total,Total Annual Cost,$0,USD/year,$0,USD/year,$0,0%
+,,,,,,,
+TIME METRICS,,,,,,,
+Efficiency,Avg Task Completion Time,0,minutes,0,minutes,0,0%
+Volume,Volume Per Period,0,units/month,0,units/month,0,0%
+Rework,Rework Hours Per Week,0,hours/week,0,hours/week,0,0%
+QC,Quality Control Hours Per Week,0,hours/week,0,hours/week,0,0%
+,,,,,,,
+QUALITY METRICS,,,,,,,
+Errors,Error Rate,0,%,0,%,0 pp,0%
+Accuracy,Accuracy Rate,0,%,0,%,0 pp,0%
+Cost,Cost Per Error,$0,USD,$0,USD,$0,0%
+,,,,,,,
+CUSTOMER SATISFACTION,,,,,,,
+NPS,Net Promoter Score,0,score,0,score,0,0%
+CSAT,Customer Satisfaction Score,0,score,0,score,0,0%
+Complaints,Complaints Per Month,0,count,0,count,0,0%
+Response,Avg Response Time,0,hours,0,hours,0,0%
+Churn,Churn Rate,0,%,0,%,0 pp,0%
+,,,,,,,
+SALES/REVENUE METRICS,,,,,,,
+Conversion,Conversion Rate,0,%,0,%,0 pp,0%
+Deal Size,Average Deal Size,$0,USD,$0,USD,$0,0%
+Sales Cycle,Sales Cycle Length,0,days,0,days,0,0%
+Lead Response,Lead Response Time,0,hours,0,hours,0,0%
+Volume,Leads Per Month,0,count,0,count,0,0%
+Revenue,Monthly Revenue,$0,USD,$0,USD,$0,0%
+Lost Revenue,Estimated Lost Revenue/Month,$0,USD,$0,USD,$0,0%
+,,,,,,,
+,,,,,,,
+ROI CALCULATION SUMMARY,,,,,,,
+,,,,,,,
+COST SAVINGS,Monthly,Annual,,,,,
+Labor Cost Savings,$0,$0,,,,,
+Software Cost Savings,$0,$0,,,,,
+Overhead Savings,$0,$0,,,,,
+Error Cost Savings,$0,$0,,,,,
+Total Cost Savings,$0,$0,,,,,
+,,,,,,,
+REVENUE IMPACT,Monthly,Annual,,,,,
+Direct Revenue Increase,$0,$0,,,,,
+Revenue from Conversion Improvement,$0,$0,,,,,
+Revenue from Reduced Churn,$0,$0,,,,,
+Total Revenue Increase,$0,$0,,,,,
+,,,,,,,
+NET BENEFIT CALCULATION,,,,,,,
+Total Monthly Savings,$0,,,,,,
+Total Monthly Revenue Increase,$0,,,,,,
+Monthly AI Solution Cost,($0),,,,,,
+Net Monthly Benefit,$0,,,,,,
+Net Annual Benefit,$0,,,,,,
+,,,,,,,
+CUMULATIVE ANALYSIS (Based on Months Since Deployment),,,,,,,
+Total Investment (Implementation + Recurring Costs),$0,,,,,,
+Total Savings & Revenue Gains,$0,,,,,,
+Cumulative Net Benefit,$0,,,,,,
+,,,,,,,
+KEY ROI METRICS,,,,,,,
+ROI Percentage,0%,"Formula: (Net Benefit / Total Investment) x 100",,,,,
+Payback Period,0,months,,,,,
+Break-Even Month,0,month,,,,,
+,,,,,,,
+EFFICIENCY METRICS,,,,,,,
+Time Savings,0%,,,,,,
+Time Saved Per Week,0,hours,,,,,
+Error Reduction,0,percentage points,,,,,
+Quality Improvement,0,percentage points,,,,,
+Customer Satisfaction Improvement,0,points,,,,,
+,,,,,,,
+,,,,,,,
+INSTRUCTIONS FOR USE,,,,,,,
+"1. Fill in the YELLOW cells with your baseline (before) data",,,,,,,
+"2. Fill in the BLUE cells with your current (after) data",,,,,,,
+"3. Enter implementation and ongoing costs at the top",,,,,,,
+"4. Formulas will automatically calculate improvements and ROI",,,,,,,
+"5. Review the ROI Calculation Summary section for key metrics",,,,,,,
+,,,,,,,
+FORMULAS TO IMPLEMENT (For Excel/Google Sheets),,,,,,,
+,,,,,,,
+"In the 'Change' column (Column G), use formulas like:",,,,,,,
+"=E[row]-C[row] for absolute change",,,,,,,
+,,,,,,,
+"In the '% Change' column (Column H), use formulas like:",,,,,,,
+"=IF(C[row]=0,0,(E[row]-C[row])/C[row]*100) for percentage change",,,,,,,
+,,,,,,,
+"For Total Monthly Cost (Baseline):",,,,,,,
+"=SUM(C[labor_row],C[software_row],C[overhead_row],C[error_row])",,,,,,,
+,,,,,,,
+"For Total Monthly Cost (Current - including AI cost):",,,,,,,
+"=SUM(E[labor_row],E[software_row],E[overhead_row],E[error_row])+$C$6",,,,,,,
+,,,,,,,
+"For Cost Savings:",,,,,,,
+"Labor Cost Savings (Monthly) = Baseline Labor - Current Labor",,,,,,,
+"=C[baseline_labor_row]-E[current_labor_row]",,,,,,,
+,,,,,,,
+"For Net Monthly Benefit:",,,,,,,
+"=SUM(cost_savings_monthly,revenue_increase_monthly)-monthly_ai_cost",,,,,,,
+,,,,,,,
+"For ROI Percentage:",,,,,,,
+"=(Cumulative Net Benefit / Total Investment) * 100",,,,,,,
+,,,,,,,
+"For Payback Period:",,,,,,,
+"=Implementation Cost / Net Monthly Benefit",,,,,,,
+,,,,,,,
+"For Cumulative Investment:",,,,,,,
+"=Implementation Cost + (Monthly AI Cost * Months Since Deployment)",,,,,,,
+,,,,,,,
+"For Cumulative Savings:",,,,,,,
+"=(Monthly Savings * Months Since Deployment) + (Revenue Increase * Months)",,,,,,,
